@@ -4,8 +4,10 @@ import Header from "./Header";
 function Layout({ children }) {
   return (
     <>
-      <Header />
-      {children}
+      <div className="bg-green-100">
+        <Header />
+        {children}
+      </div>
     </>
   );
 }
