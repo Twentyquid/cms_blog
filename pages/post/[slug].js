@@ -50,7 +50,7 @@ export async function getStaticPaths() {
   const posts = await getPosts();
   //   console.log("slug inside getStaticPaths is: ", posts[0].node.slug);
   return {
-    fallback: true,
+    fallback: false,
     paths: posts.map(({ node: { slug } }) => {
       return { params: { slug } };
     }),
