@@ -5,9 +5,16 @@ import PostDetail from "../../components/PostDetail";
 import Author from "../../components/Author";
 import CommentsForm from "../../components/CommentsForm";
 import Comments from "../../components/Comments";
+import Loader from "../../components/Loader";
 import { getPostDetails, getPosts } from "../../services";
 
+import { useRouter } from "next/router";
+
 function Article({ post }) {
+  const router = useRouter();
+  if (router.isFallback) {
+    return <Loader />;
+  }
   return (
     <div className="container mx-auto px-10 mb-8">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
@@ -50,7 +57,7 @@ export async function getStaticPaths() {
   const posts = await getPosts();
   //   console.log("slug inside getStaticPaths is: ", posts[0].node.slug);
   return {
-    fallback: false,
+    fallback: true,
     paths: posts.map(({ node: { slug } }) => {
       return { params: { slug } };
     }),
